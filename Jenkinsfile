@@ -1,23 +1,20 @@
 pipeline {
     agent any
-
     stages {
-        stage ('Print') {
+        stage('Build') {
             steps {
-                echo "Hello Devops Engineers"
+                sh 'mvn -B -DskipTests clean package'
             }
         }
-    }
-
-    post {
-        always {
-            echo 'I will always say Hello again!'
-        }
-        success {
-            echo 'I will say Hello only if job is success'
-        }
-        failure {
-            echo 'I will say Hello only if job is failure'
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
         }
     }
 }
