@@ -16,6 +16,11 @@ public class BaseTest {
     public void startUp() throws InterruptedException {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
+        options.addArguments("--window-position=0,0");
+        options.addArguments("--window-size=1840,1080");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--headless");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         WebDriverManager.chromedriver().setup(); //bonigarcia
         //System.setProperty("webdriver.chrome.driver", "/Users/ceren/Downloads/chromedriver-mac-arm64/chromedriver");
