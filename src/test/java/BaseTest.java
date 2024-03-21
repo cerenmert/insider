@@ -13,10 +13,12 @@ public class BaseTest {
 
     @BeforeMethod
     public void startUp() throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "linuxchromedriver");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
+        options.addArguments("--headless");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-        System.setProperty("webdriver.chrome.driver", "/Users/ceren/Downloads/chromedriver-mac-arm64/chromedriver");
+        //System.setProperty("webdriver.chrome.driver", "/Users/ceren/Downloads/chromedriver-mac-arm64/chromedriver");
         webDriver = new ChromeDriver(options);
         webDriver.manage().window().maximize();
         webDriver.get("https://useinsider.com/");
