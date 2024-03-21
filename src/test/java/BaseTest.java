@@ -1,4 +1,5 @@
 import com.useInsider.Utility;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,11 +14,10 @@ public class BaseTest {
 
     @BeforeMethod
     public void startUp() throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver", "linuxchromedriver");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
-        options.addArguments("--headless");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+        WebDriverManager.chromedriver().setup(); //bonigarcia
         //System.setProperty("webdriver.chrome.driver", "/Users/ceren/Downloads/chromedriver-mac-arm64/chromedriver");
         webDriver = new ChromeDriver(options);
         webDriver.manage().window().maximize();
