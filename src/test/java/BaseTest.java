@@ -1,7 +1,5 @@
 import com.useInsider.Utility;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.log4j.chainsaw.Main;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
