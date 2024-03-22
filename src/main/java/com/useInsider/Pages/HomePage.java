@@ -10,7 +10,7 @@ public class HomePage extends BasePage {
         super(webDriver);
     }
 
-    public CareersPage goToCareersPage() throws InterruptedException {
+    public CareersPage goToCareersPage(){
         click(companyNavBarItemBy);
         click(careerDropdownMenuItemBy);
         return new CareersPage(webDriver);
