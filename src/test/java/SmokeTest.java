@@ -1,7 +1,7 @@
 import com.useInsider.Pages.*;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class SmokeTest extends BaseTest{
@@ -13,9 +13,9 @@ public class SmokeTest extends BaseTest{
         assertTrue(careersPage.ourLocationsSectionIsDisplayed());
         assertTrue(careersPage.lifeAtInsiderSectionIsDisplayed());
         assertTrue(careersPage.teamsSectionIsDisplayed());
-        Assert.assertEquals(careersPage.getSeeAllTeamsButtonText(), "See all teams");
-        Assert.assertEquals(careersPage.getLifeAtInsiderText(), "Life at Insider");
-        Assert.assertEquals(careersPage.getOurLocationsTitle(), "Our Locations");
+        assertEquals(careersPage.getSeeAllTeamsButtonText(), "See all teams");
+        assertEquals(careersPage.getLifeAtInsiderText(), "Life at Insider");
+        assertEquals(careersPage.getOurLocationsTitle(), "Our Locations");
         careersPage.clickAllTeamsButton();
         careersPage.pageScroll();
         QualityAssuranceCareersPage qualityAssuranceCareersPage = careersPage.clickQualityAssurance();
