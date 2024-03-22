@@ -17,6 +17,12 @@ pipeline {
                 always {
                     junit 'target/surefire-reports/*.xml'
                 }
+                success {
+                    echo 'Pipeline executed successfully!'
+                }
+                failure {
+                    echo 'Pipeline failed!'
+                }
             }
         }
     }
