@@ -55,7 +55,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void startUp(){
-        buildWebDriver("chrome");
+        buildWebDriver("firefox");
         webDriver.manage().window().maximize();
         webDriver.get("https://useinsider.com/");
         WebElement acceptCookie = webDriver.findElement(acceptCookieBy);
