@@ -12,12 +12,11 @@ import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
     WebDriver webDriver;
+    WebDriverManager wdm = WebDriverManager.chromedriver().browserInDocker().enableVnc();
     By acceptCookieBy = By.id("wt-cli-accept-all-btn");
 
     @BeforeMethod
     public void startUp() throws InterruptedException {
-        WebDriverManager.chromedriver().setup(); //bonigarcia
-        Main.main(new String[] { "standalone", "--port", "4445" });
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
         options.addArguments("--headless");
@@ -34,7 +33,7 @@ public class BaseTest {
     }
     @BeforeEach
     void setupTest() {
-        webDriver = WebDriverManager.chromedriver().remoteAddress("http://localhost:4445/wd/hub").create();
+        webDriver = wdm.create();
     }
 
     @AfterMethod
