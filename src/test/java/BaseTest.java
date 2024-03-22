@@ -16,7 +16,6 @@ public class BaseTest {
     public void startUp() throws InterruptedException {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
-        options.addArguments("--disable-impl-side-painting");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         WebDriverManager.chromedriver().setup(); //bonigarcia
         //System.setProperty("webdriver.chrome.driver", "/Users/ceren/Downloads/chromedriver-mac-arm64/chromedriver");
