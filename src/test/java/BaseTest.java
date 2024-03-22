@@ -38,6 +38,7 @@ public class BaseTest {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--disable-notifications");
+            options.addArguments("--headless=new");
             options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
             //System.setProperty("webdriver.chrome.driver", "/Users/ceren/Downloads/chromedriver-mac-arm64/chromedriver");
             webDriver = new ChromeDriver(options);
