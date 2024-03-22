@@ -18,6 +18,8 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
         options.addArguments("--headless");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         //System.setProperty("webdriver.chrome.driver", "/Users/ceren/Downloads/chromedriver-mac-arm64/chromedriver");
         webDriver = new ChromeDriver(options);
