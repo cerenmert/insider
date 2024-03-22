@@ -14,7 +14,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void startUp() throws InterruptedException {
-        WebDriverManager.chromedriver().driverVersion("125.0.6368.2").clearDriverCache().setup();
+        WebDriverManager.chromedriver().clearDriverCache().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
         options.addArguments("--headless");
