@@ -5,15 +5,12 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
-public class OpenPositions extends BasePage {
+public class OpenPositionsPage extends BasePage {
 
     By filteredQaBy = By.cssSelector("span#select2-filter-by-department-container[title='Quality Assurance']");
     By istanbulOnTheDropdownBy = By.id("filter-by-location");
@@ -24,13 +21,12 @@ public class OpenPositions extends BasePage {
     By listedIstanbulJobsBy = By.cssSelector(".position-list-item.col-12.col-lg-4 .position-location");
     By viewRoleButtonBy = By.cssSelector(".btn.btn-navy.rounded.pt-2.pr-5.pb-2.pl-5");
 
-    public OpenPositions(WebDriver webDriver) {
+    public OpenPositionsPage(WebDriver webDriver) {
         super(webDriver);
     }
 
     public boolean filterByDepartment() {
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.presenceOfElementLocated(filteredQaBy));
+        waitUntilHTMLElementLoadIntoTheDOM(filteredQaBy);
         return webDriver.findElement(filteredQaBy).isDisplayed();
     }
 
@@ -39,11 +35,12 @@ public class OpenPositions extends BasePage {
         jse.executeScript("window.scrollBy(0,800)");
     }
 
-    public void selectLocationFromTheLocationDropdown() throws InterruptedException {
-        Thread.sleep(3000);
-        WebElement locationDropdown = webDriver.findElement(istanbulOnTheDropdownBy);
-        Select objSelect = new Select(locationDropdown);
-        objSelect.selectByIndex(1);
+    public void selectLocationFromTheLocationDropdown() {
+        if (isDisplayed(istanbulOnTheDropdownBy)) {
+            WebElement locationDropdown = webDriver.findElement(istanbulOnTheDropdownBy);
+            Select objSelect = new Select(locationDropdown);
+            objSelect.selectByIndex(1);
+        }
     }
 
     public boolean checkAllListedJobsAreQaJobs() throws InterruptedException {
@@ -83,7 +80,7 @@ public class OpenPositions extends BasePage {
         return new LeverApplicationFormPage(switchWindow());
     }
     public String getJobTitle() {
-        return webDriver.findElement(jobTitleBy).getText();
+        return getText(jobTitleBy);
     }
 
 

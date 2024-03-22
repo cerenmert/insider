@@ -11,9 +11,8 @@ public class HomePage extends BasePage {
     }
 
     public CareersPage goToCareersPage() throws InterruptedException {
-        webDriver.findElement(companyNavBarItemBy).click();
-        Thread.sleep(2000);
-        webDriver.findElement(careerDropdownMenuItemBy).click();
+        click(companyNavBarItemBy);
+        click(careerDropdownMenuItemBy);
         return new CareersPage(webDriver);
     }
 

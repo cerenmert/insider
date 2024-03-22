@@ -11,9 +11,8 @@ public class QualityAssuranceCareersPage extends BasePage{
         super(webDriver);
     }
 
-    public OpenPositions findAllQAJobs() {
-        webDriver.findElement(seeAllQAJobs).click();
-        return new OpenPositions(webDriver);
+    public OpenPositionsPage findAllQAJobs() {
+        click(seeAllQAJobs);
+        return new OpenPositionsPage(webDriver);
     }
-
 }

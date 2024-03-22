@@ -24,34 +24,32 @@ public class CareersPage extends BasePage {
         jse.executeScript("window.scrollBy(0,2200)");
     }
 
-    public boolean shouldTeamsSectionDisplayed() {
-        return webDriver.findElement(teamsSectionBy).isDisplayed();
+    public boolean teamsSectionIsDisplayed() {
+        return isDisplayed(teamsSectionBy);
     }
-    public boolean shouldLifeAtInsiderSectionDisplayed() {
-        return webDriver.findElement(lifeAtInsiderSectionBy).isDisplayed();
+    public boolean lifeAtInsiderSectionIsDisplayed() {
+        return isDisplayed(lifeAtInsiderSectionBy);
     }
-    public boolean shouldOurLocationsSectionDisplayed() {
-        return webDriver.findElement(ourLocationsSectionBy).isDisplayed();
+    public boolean ourLocationsSectionIsDisplayed() {
+        return isDisplayed(ourLocationsSectionBy);
     }
-    public String shouldSeeAllTeamsButtonText() {
-        return webDriver.findElement(seeAllTeamsButtonBy).getText();
+    public String getSeeAllTeamsButtonText() {
+        return getText(seeAllTeamsButtonBy);
     }
-    public String lifeAtInsiderText() {
-        return webDriver.findElement(lifeAtInsiderTextBy).getText();
+    public String getLifeAtInsiderText() {
+        return getText(lifeAtInsiderTextBy);
     }
-    public String ourLocationsTitle() {
-        return webDriver.findElement(ourLocationsTitleBy).getText();
+    public String getOurLocationsTitle() {
+        return getText(ourLocationsTitleBy);
     }
-    public void shouldClickAllTeamsButton() {
+    public void clickAllTeamsButton() {
         WebElement element = webDriver.findElement(seeAllTeamsButtonBy);
         Actions actions = new Actions(webDriver);
         actions.moveToElement(element).click().build().perform();
     }
-
-    public QualityAssuranceCareersPage shouldClickQualityAssurance() {
-        //How To Handle NoSuchElementException in Selenium?
+    public QualityAssuranceCareersPage clickQualityAssurance() {
         waitUntilHTMLElementLoadIntoTheDOM(qualityAssuranceBy);
-        webDriver.findElement(qualityAssuranceBy).click();
+        click(qualityAssuranceBy);
         return new QualityAssuranceCareersPage(webDriver);
     }
 }
