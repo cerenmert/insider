@@ -12,11 +12,11 @@ import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
     WebDriver webDriver;
-    WebDriverManager wdm = WebDriverManager.chromedriver().browserInDocker().enableVnc();
     By acceptCookieBy = By.id("wt-cli-accept-all-btn");
 
     @BeforeMethod
     public void startUp() throws InterruptedException {
+        WebDriverManager.chromedriver().clearDriverCache().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
         options.addArguments("--headless");
@@ -30,10 +30,6 @@ public class BaseTest {
         Thread.sleep(2000);
         WebElement acceptCookie = webDriver.findElement(acceptCookieBy);
         acceptCookie.click();
-    }
-    @BeforeEach
-    void setupTest() {
-        webDriver = wdm.create();
     }
 
     @AfterMethod
