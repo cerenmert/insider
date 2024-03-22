@@ -12,11 +12,14 @@ import org.openqa.selenium.manager.SeleniumManagerOutput;
 import org.openqa.selenium.remote.service.DriverFinder;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.nio.file.Path;
+import java.time.Duration;
 import java.util.Objects;
 
 
@@ -55,7 +58,8 @@ public class BaseTest {
         webDriver.manage().window().maximize();
         webDriver.get("https://useinsider.com/");
         WebElement acceptCookie = webDriver.findElement(acceptCookieBy);
-        acceptCookie.click();
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(acceptCookie)).click();
     }
 
     @AfterMethod
