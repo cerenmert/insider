@@ -16,7 +16,7 @@ public class WebDriverHelper {
     }
 
     public void isDisplayed(By byElement) {
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.elementToBeClickable(byElement)).isDisplayed();
     }
 
