@@ -1,9 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -16,19 +12,19 @@ public class BaseTest {
     public void buildWebDriver(String browser) {
         if (Objects.equals(browser, "firefox")) {
             WebDriverManager.firefoxdriver().setup();
-            webDriver = new FirefoxDriver();
+//            webDriver = new FirefoxDriver();
         } else {
             WebDriverManager.chromedriver().setup();
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--disable-notifications");
-            options.addArguments("--remote-allow-origins=*");
-            options.addArguments("--headless");
-            options.addArguments("--disable-gpu");
-            options.addArguments("--no-sandbox");
-            webDriver = new ChromeDriver(options);
+//            ChromeOptions options = new ChromeOptions();
+//            options.addArguments("--disable-notifications");
+//            options.addArguments("--remote-allow-origins=*");
+//            options.addArguments("--headless");
+//            options.addArguments("--disable-gpu");
+//            options.addArguments("--no-sandbox");
+//            webDriver = new ChromeDriver(options);
         }
 
-        webDriver.get("https://useinsider.com/");
+//        webDriver.get("https://useinsider.com/");
     }
 
     @BeforeSuite
@@ -39,6 +35,8 @@ public class BaseTest {
 
     @AfterSuite
     public void finish() {
-        webDriver.quit();
+        if (webDriver != null) {
+            webDriver.quit();
+        }
     }
 }

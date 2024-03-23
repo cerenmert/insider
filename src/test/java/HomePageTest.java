@@ -26,7 +26,7 @@ public class HomePageTest extends BaseTest {
         options.addArguments("--no-sandbox");
         webDriver = new ChromeDriver(options);
         webDriver.manage().window().setSize(new Dimension(1366, 768));
-        webDriver.get(startUrl);
+
         homePage = new HomePage(webDriver);
     }
 
