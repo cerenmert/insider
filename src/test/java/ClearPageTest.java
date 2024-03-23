@@ -30,6 +30,8 @@ public class ClearPageTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
+        webDriver.findElement(By.cssSelector("a")).click();
     }
 
     @Test
@@ -40,7 +42,6 @@ public class ClearPageTest {
             throw new RuntimeException(e);
         }
         System.out.println(webDriver.getCurrentUrl());
-        webDriver.findElement(By.cssSelector("a")).click();
     }
 
     @AfterClass()
