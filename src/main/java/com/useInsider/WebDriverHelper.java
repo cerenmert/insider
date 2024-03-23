@@ -66,14 +66,9 @@ public class WebDriverHelper {
         webDriver.switchTo().window(windows.toArray()[windows.toArray().length - 1].toString());
     }
 
-    public boolean softWaitForPageToLoad() {
-        try {
-            new WebDriverWait(webDriver, Duration.ofSeconds(60)).until(
-                    webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").toString().matches("interactive|complete"));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public void softWaitForPageToLoad() {
+        new WebDriverWait(webDriver, Duration.ofSeconds(60)).until(
+                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").toString().matches("interactive|complete"));
     }
 
     public void waitForLoad(By byElement) {
