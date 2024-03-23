@@ -25,10 +25,20 @@ public class ClearPageTest {
     @Test
     public void openPage() {
         webDriver.get("http://google.com");
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
     public void makeTest() {
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println(webDriver.getCurrentUrl());
         webDriver.findElement(By.cssSelector("a")).click();
     }
