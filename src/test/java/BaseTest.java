@@ -22,16 +22,16 @@ public class BaseTest {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--disable-notifications");
             options.addArguments("--remote-allow-origins=*");
-//            options.addArguments("--headless");
-//            options.addArguments("--disable-gpu");
-//            options.addArguments("--no-sandbox");
+            options.addArguments("--headless");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--no-sandbox");
             webDriver = new ChromeDriver(options);
         }
     }
 
     @BeforeSuite
     public void startUp() {
-        buildWebDriver("chrome");
+        buildWebDriver("firefox");
         webDriver.manage().window().setSize(new Dimension(1366, 768));
     }
 
