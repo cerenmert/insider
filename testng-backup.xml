@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Insider Selenium Test Suite">
+    <parameter name="browserName" value="Chrome"/>
+    <test name="tests" parallel="false" thread-count="1" group-by-instances="true" preserve-order="true">
+        <classes>
+            <class name="HomePageTest">
+                <methods>
+                    <include name="openHomePage"/>
+                    <include name="verifyIsInHomePage"/>
+                    <include name="acceptCookies"/>
+                    <include name="clickCompanyMenu"/>
+                    <include name="clickCareersItemInDropdownMenu"/>
+                </methods>
+            </class>
+            <class name="CareersPageTest">
+                <methods>
+                    <include name="verifyIsInCareersPage"/>
+                    <include name="verifyTeamsSectionIsVisible"/>
+                    <include name="verifyLocationsSectionIsVisible"/>
+                    <include name="verifyLifeAtInsiderIsVisible"/>
+                    <include name="clickSeeAllTeamsButtonInTeamsSection"/>
+                    <include name="verifyQualityAssuranceTeamIsVisible"/>
+                    <include name="clickQualityAssuranceTeamIsVisible"/>
+                </methods>
+            </class>
+            <class name="QualityAssurancePageTest">
+                <methods>
+                    <include name="verifyIsInQualityAssurancePage"/>
+                    <include name="clickSeeAllQAJobsButton"/>
+                </methods>
+            </class>
+            <class name="OpenPositionsPageTest">
+                <methods>
+                    <include name="verifyIsInOpenPositionsPage"/>
+                    <include name="clickSeeAllQAJobsButton"/>
+                    <include name="verifyQADepartmentIsSelected"/>
+                    <include name="selectIstanbulLocationInFilter"/>
+                    <include name="verifyLocationIstanbulIsSelected"/>
+                    <include name="verifyAllListedJobsDepartmentIsQA"/>
+                    <include name="verifyAllListedJobsLocationIsIstanbul"/>
+                    <include name="clickListedJobViewRoleButton"/>
+                </methods>
+            </class>
+            <class name="LeverApplicationFormPageTest">
+                <methods>
+                    <include name="verifyIsInLeverApplicationFormPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
