@@ -16,8 +16,6 @@ public class HomePageTest extends BaseTest {
 
     @BeforeClass
     public void beforeStart() {
-        WebDriverManager.firefoxdriver().setup();
-        WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
         options.addArguments("--remote-allow-origins=*");
