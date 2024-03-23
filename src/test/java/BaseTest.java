@@ -33,7 +33,7 @@ public class BaseTest {
 
     @BeforeSuite
     public void startUp() {
-        buildWebDriver("firefox");
+        buildWebDriver("chrome");
         webDriver.manage().window().setSize(new Dimension(1366, 768));
     }
 
