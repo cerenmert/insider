@@ -8,9 +8,14 @@ import org.openqa.selenium.interactions.Actions;
 
 public class CareersPage extends BasePage {
     JavascriptExecutor js = (JavascriptExecutor) webDriver;
-    By teamsSectionBy = By.id("career-find-our-calling");
+    public By teamsSectionBy = By.id("career-find-our-calling");
+    public By locationSectionBy = By.id("career-our-location");
+    public By lifeAtInsiderSectionBy = By.cssSelector("section[data-id=a8e7b90]"); // This section has not any id
+    public By seeAllTeamsButtonInTeamsSectionBy = By.cssSelector("#career-find-our-calling a.btn.loadmore");
+    public By qualityAssuranceTeamCardBy = By.cssSelector("#career-find-our-calling .job-item:nth-of-type(12)");
+    public By qualityAssuranceTeamLinkBy = By.cssSelector("#career-find-our-calling .job-item:nth-of-type(12) a");
+
     By seeAllTeamsButtonBy = By.cssSelector(".btn.loadmore");
-    By lifeAtInsiderSectionBy = By.cssSelector(".elementor-section.elementor-top-section.elementor-element.elementor-element-a8e7b90.elementor-section-full_width.elementor-section-height-default.elementor-section-height-default");
     By lifeAtInsiderTextBy = By.cssSelector("[data-id='21cea83'] .elementor-heading-title");
     By ourLocationsSectionBy = By.cssSelector(".elementor-section.elementor-top-section.elementor-element.elementor-element-8ab30be.elementor-section-full_width.elementor-section-height-default.elementor-section-height-default");
     By ourLocationsTitleBy = By.cssSelector(".category-title-media.ml-0");
@@ -24,15 +29,15 @@ public class CareersPage extends BasePage {
         js.executeScript("window.scrollBy(0,2200)");
     }
     public boolean teamsSectionIsDisplayed() {
-        return isDisplayed(teamsSectionBy);
+        return isVisible(teamsSectionBy);
     }
 
     public boolean lifeAtInsiderSectionIsDisplayed() {
-        return isDisplayed(lifeAtInsiderSectionBy);
+        return isVisible(lifeAtInsiderSectionBy);
     }
 
     public boolean ourLocationsSectionIsDisplayed() {
-        return isDisplayed(ourLocationsSectionBy);
+        return isVisible(ourLocationsSectionBy);
     }
 
     public String getSeeAllTeamsButtonText() {
@@ -52,9 +57,9 @@ public class CareersPage extends BasePage {
         Actions actions = new Actions(webDriver);
         actions.moveToElement(element).click().build().perform();
     }
-    public QualityAssuranceCareersPage clickQualityAssurance() {
+    public QualityAssurancePage clickQualityAssurance() {
         waitUntilHTMLElementLoadIntoTheDOM(qualityAssuranceBy);
         click(qualityAssuranceBy);
-        return new QualityAssuranceCareersPage(webDriver);
+        return new QualityAssurancePage(webDriver);
     }
 }

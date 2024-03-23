@@ -3,16 +3,15 @@ package com.useInsider.Pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class QualityAssuranceCareersPage extends BasePage{
+public class QualityAssurancePage extends BasePage {
+    public By seeAllQAJobsButtonBy = By.linkText("See all QA jobs");
 
-    By seeAllQAJobs = By.linkText("See all QA jobs");
-
-    public QualityAssuranceCareersPage(WebDriver webDriver) {
+    public QualityAssurancePage(WebDriver webDriver) {
         super(webDriver);
     }
 
     public OpenPositionsPage findAllQAJobs() {
-        click(seeAllQAJobs);
+        click(seeAllQAJobsButtonBy);
         return new OpenPositionsPage(webDriver);
     }
 }

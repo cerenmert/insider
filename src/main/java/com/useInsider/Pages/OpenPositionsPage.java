@@ -12,8 +12,15 @@ import java.util.Set;
 
 public class OpenPositionsPage extends BasePage {
 
-    By filteredQaBy = By.cssSelector("span#select2-filter-by-department-container[title='Quality Assurance']");
-    By istanbulOnTheDropdownBy = By.id("filter-by-location");
+    public By filteredQaBy = By.cssSelector("#select2-filter-by-department-container[title='Quality Assurance']");
+    public By filterByLocationSelectBoxBy = By.id("filter-by-location");
+    public By locationFilterBy = By.cssSelector("#select2-filter-by-location-container");
+    public By resultCountBy = By.cssSelector("#resultCounter");
+    public By totalResultsCountTextBy = By.cssSelector("#resultCounter .totalResult");
+    public By jobItemDepartmentBy = By.cssSelector(".position-list-item .position-department");
+    public By jobItemLocationBy = By.cssSelector(".position-list-item .position-location");
+    public By jobItemBy = By.cssSelector(".position-list-item");
+    public By jobItemViewRoleButtonBy = By.cssSelector(".position-list-item a.btn");
 
     By listedJobCardBy = By.cssSelector(".position-list-item.col-12.col-lg-4");
     By jobTitleBy = By.cssSelector(".position-title.font-weight-bold");
@@ -36,8 +43,8 @@ public class OpenPositionsPage extends BasePage {
     }
 
     public void selectLocationFromTheLocationDropdown() {
-        if (isDisplayed(istanbulOnTheDropdownBy)) {
-            WebElement locationDropdown = webDriver.findElement(istanbulOnTheDropdownBy);
+        if (isVisible(filterByLocationSelectBoxBy)) {
+            WebElement locationDropdown = webDriver.findElement(filterByLocationSelectBoxBy);
             Select objSelect = new Select(locationDropdown);
             objSelect.selectByIndex(1);
         }
@@ -72,13 +79,14 @@ public class OpenPositionsPage extends BasePage {
         return webDriver.switchTo().window(windows.toArray()[windows.toArray().length - 1].toString());
     }
 
-    public LeverApplicationFormPage checkViewRoleButtonAction(){
+    public LeverApplicationFormPage checkViewRoleButtonAction() {
         Actions action = new Actions(webDriver);
         action.moveToElement(webDriver.findElement(listedJobCardBy)).perform();
         WebElement viewRoleButton = webDriver.findElement(viewRoleButtonBy);
         viewRoleButton.click();
         return new LeverApplicationFormPage(switchWindow());
     }
+
     public String getJobTitle() {
         return getText(jobTitleBy);
     }

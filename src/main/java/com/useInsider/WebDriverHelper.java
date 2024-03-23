@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Set;
 
 public class WebDriverHelper {
 
@@ -19,18 +21,66 @@ public class WebDriverHelper {
         this.webDriver = webDriver;
     }
 
-    public boolean isDisplayed(By byElement) {
+    public boolean isVisible(By byElement) {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        return wait.until(ExpectedConditions.elementToBeClickable(byElement)).isDisplayed();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(byElement)).isDisplayed();
     }
+
     public void click(By byElement) {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(byElement)).click();
     }
+
+    public void selectOptionInSelect2(By selector, String text) {
+        javascriptExecutor(this.webDriver)
+                .executeScript("$(arguments[0]).val(arguments[1]).trigger('change')", this.webDriver.findElement(selector), text);
+    }
+
+    public String getTextOfElement(By selector) {
+        return this.webDriver.findElement(selector).getText();
+    }
+
+    public void waitForTextChange(By selector, String text) {
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(this.webDriver.findElement(selector), text)));
+    }
+
+    public boolean checkAllElementTexts(By selector, String text) {
+        List<WebElement> allJobs = webDriver.findElements(selector);
+        for (WebElement webElement : allJobs) {
+            if (!(webElement.getText().equals(text))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void hoverToElement(By selector) {
+        Actions action = new Actions(webDriver);
+        action.moveToElement(webDriver.findElement(selector)).perform();
+    }
+
+    public void switchToLastWindow() {
+        Set<String> windows = webDriver.getWindowHandles();
+        webDriver.switchTo().window(windows.toArray()[windows.toArray().length - 1].toString());
+    }
+
+    public boolean softWaitForPageToLoad() {
+        try {
+            new WebDriverWait(webDriver, Duration.ofSeconds(60)).until(
+                    webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").toString().matches("interactive|complete"));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public void waitForLoad(By byElement) {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(byElement));
     }
+
     public String getText(By byElement) {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(byElement)).getText();
@@ -43,6 +93,16 @@ public class WebDriverHelper {
 
     public JavascriptExecutor javascriptExecutor(WebDriver webDriver) {
         return (JavascriptExecutor) webDriver;
+    }
+
+    public void scrollToElementOfMid(By selector) {
+        javascriptExecutor(this.webDriver)
+                .executeScript("arguments[0].scrollIntoView({behavior: \"instant\", block: \"center\", inline: \"nearest\"});", this.webDriver.findElement(selector));
+    }
+
+    public void scrollToElementOfEnd(By selector) {
+        javascriptExecutor(this.webDriver)
+                .executeScript("arguments[0].scrollIntoView({behavior: \"instant\", block: \"end\", inline: \"nearest\"});", this.webDriver.findElement(selector));
     }
 
     public void scrollToOfSet(WebDriver webDriver, int x, int y) {

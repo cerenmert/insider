@@ -1,72 +1,38 @@
-import com.useInsider.Utility;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.GeckoDriverService;
-import org.openqa.selenium.manager.SeleniumManagerOutput;
-import org.openqa.selenium.remote.service.DriverFinder;
-import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.safari.SafariOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
-import java.nio.file.Path;
-import java.time.Duration;
 import java.util.Objects;
 
 
 public class BaseTest {
-    WebDriver webDriver;
-    By acceptCookieBy = By.id("wt-cli-accept-all-btn");
+    public static WebDriver webDriver;
 
-    public Path getFirefoxLocation() {
-        FirefoxOptions options = new FirefoxOptions();
-        options.setBrowserVersion("stable");
-        SeleniumManagerOutput.Result output = DriverFinder.getPath(GeckoDriverService.createDefaultService(), options);
-        return Path.of(output.getBrowserPath());
-    }
     public void buildWebDriver(String browser) {
-        if (Objects.equals(browser, "chrome")) {
+        if (Objects.equals(browser, "firefox")) {
+            WebDriverManager.firefoxdriver().setup();
+            webDriver = new FirefoxDriver();
+        } else {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--disable-notifications");
-            options.addArguments("--headless=new");
-            options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-            //System.setProperty("webdriver.chrome.driver", "/Users/ceren/Downloads/chromedriver-mac-arm64/chromedriver");
+            options.addArguments("--remote-allow-origins=*");
             webDriver = new ChromeDriver(options);
-        } else if (Objects.equals(browser, "safari")) {
-            WebDriverManager.safaridriver().setup();
-            SafariOptions options = new SafariOptions();
-            webDriver = new SafariDriver(options);
-        } else if (Objects.equals(browser, "firefox")){
-            FirefoxOptions options = new FirefoxOptions();
-            options.setBinary(getFirefoxLocation());
-            webDriver = new FirefoxDriver(options);
         }
     }
 
-    @BeforeMethod
-    public void startUp(){
-        buildWebDriver("firefox");
+    @BeforeSuite
+    public void startUp() {
+        buildWebDriver("chrome");
         webDriver.manage().window().maximize();
-        webDriver.get("https://useinsider.com/");
-        WebElement acceptCookie = webDriver.findElement(acceptCookieBy);
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(acceptCookie)).click();
     }
 
-    @AfterMethod
-    public void tearDown(ITestResult result) {
-        Utility.captureScreenshot(webDriver, result.getName());
+    @AfterSuite
+    public void finish() {
         webDriver.quit();
     }
-
 }
