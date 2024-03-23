@@ -1,3 +1,4 @@
+import com.useInsider.Pages.BasePage;
 import com.useInsider.Pages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Dimension;
@@ -15,16 +16,8 @@ public class HomePageTest extends BaseTest {
     HomePage homePage;
 
     @BeforeClass
-    public void beforeStart() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
-        options.addArguments("--remote-allow-origins=*");
-//        options.addArguments("--headless");
-//        options.addArguments("--disable-gpu");
-        options.addArguments("--no-sandbox");
-        webDriver = new ChromeDriver(options);
-        webDriver.manage().window().setSize(new Dimension(1366, 768));
-
+    public void initiliaze() {
+        new BaseTest();
         homePage = new HomePage(webDriver);
     }
 

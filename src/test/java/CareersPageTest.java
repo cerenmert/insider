@@ -11,6 +11,7 @@ public class CareersPageTest extends BaseTest {
 
     @BeforeClass
     public void beforeStart() {
+        new BaseTest();
         careersPage = new CareersPage(webDriver);
     }
 
