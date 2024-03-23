@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -21,9 +22,9 @@ public class BaseTest {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--disable-notifications");
             options.addArguments("--remote-allow-origins=*");
-            options.addArguments("--headless");
-            options.addArguments("--disable-gpu");
-            options.addArguments("--no-sandbox");
+//            options.addArguments("--headless");
+//            options.addArguments("--disable-gpu");
+//            options.addArguments("--no-sandbox");
             webDriver = new ChromeDriver(options);
         }
     }
@@ -31,7 +32,7 @@ public class BaseTest {
     @BeforeSuite
     public void startUp() {
         buildWebDriver("chrome");
-        webDriver.manage().window().maximize();
+        webDriver.manage().window().setSize(new Dimension(1366, 768));
     }
 
     @AfterSuite
