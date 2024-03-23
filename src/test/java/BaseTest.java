@@ -27,6 +27,8 @@ public class BaseTest {
             options.addArguments("--no-sandbox");
             webDriver = new ChromeDriver(options);
         }
+
+        webDriver.get("https://useinsider.com/");
     }
 
     @BeforeSuite
