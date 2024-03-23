@@ -1,6 +1,10 @@
 import com.useInsider.Pages.HomePage;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import static org.testng.AssertJUnit.assertEquals;
 
 public class HomePageTest extends BaseTest {
@@ -10,7 +14,10 @@ public class HomePageTest extends BaseTest {
 
     @BeforeClass
     public void beforeStart() {
+        WebDriverManager.firefoxdriver().setup();
+        webDriver = new FirefoxDriver();
         homePage = new HomePage(webDriver);
+        webDriver.manage().window().setSize(new Dimension(1366, 768));
     }
 
     @Test
