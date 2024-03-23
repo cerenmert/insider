@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class ClearPageTest {
-    WebDriver webDriver;
+    public static WebDriver webDriver;
 
     @BeforeClass
     public void initiliaze() {
@@ -30,8 +30,6 @@ public class ClearPageTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-        webDriver.findElement(By.cssSelector("a")).click();
     }
 
     @Test
@@ -41,7 +39,9 @@ public class ClearPageTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
         System.out.println(webDriver.getCurrentUrl());
+        webDriver.findElement(By.cssSelector("a")).click();
     }
 
     @AfterClass()

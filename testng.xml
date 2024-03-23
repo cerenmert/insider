@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Insider Selenium Test Suite">
     <parameter name="browserName" value="Chrome"/>
-    <test name="tests" parallel="false" thread-count="1" group-by-instances="true" preserve-order="true">
+    <test name="tests">
         <classes>
             <class name="ClearPageTest">
                 <methods>
