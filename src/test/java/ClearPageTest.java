@@ -1,25 +1,42 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class ClearPageTest {
     public static WebDriver webDriver;
 
     @BeforeClass
-    public void initiliaze() {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--no-sandbox");
-        webDriver = new ChromeDriver(options);
-        webDriver.manage().window().setSize(new Dimension(1366, 768));
+    public static void setUpDriver() {
+        // In v0.1 we'll be sharing the driver between tests in same class
+        // Assuming the tests will not be running in parallel.
+        // For v1.0 you can improve the model after reading about test-listeners
+
+        WebDriver driver = DriverManager.getDriver();
+        if (driver != null) {
+            return;
+        }
+
+        driver = DriverManager.createDriver("chrome");
+        DriverManager.setDriver(driver);
+    }
+
+    @AfterClass
+    public static void tearDownDriver() {
+        WebDriver driver = DriverManager.getDriver();
+        if (driver != null) {
+            driver.quit();
+            DriverManager.setDriver(null);
+        }
+    }
+
+    @BeforeMethod
+    public void setUp() {
+        webDriver = DriverManager.getDriver();
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        //
     }
 
     @Test
@@ -34,20 +51,12 @@ public class ClearPageTest {
 
     @Test
     public void makeTest() {
+        System.out.println(webDriver.getCurrentUrl());
+        webDriver.findElement(By.cssSelector("a")).click();
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
-        }
-
-        System.out.println(webDriver.getCurrentUrl());
-        webDriver.findElement(By.cssSelector("a")).click();
-    }
-
-    @AfterClass()
-    public void beforeEnd() {
-        if (webDriver != null) {
-            webDriver.quit();
         }
     }
 }
