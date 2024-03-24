@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Insider QA Example" parallel="false" thread-count="1" verbose="10" preserve-order="false">
+    <parameter name="browserName" value="chrome"/>
+    <test name="tests">
+        <classes>
+            <class name="tests.InsiderTest">
+                <methods>
+                    <include name="goToHomePage"/>
+                    <include name="verifyIsInHomePage"/>
+                    <include name="acceptCookies"/>
+                    <include name="clickCompanyMenu"/>
+                    <include name="clickCareersItemInDropdownMenu"/>
+                    <include name="verifyIsInCareersPage"/>
+                    <include name="verifyTeamsSectionIsVisible"/>
+                    <include name="verifyLocationsSectionIsVisible"/>
+                    <include name="verifyLifeAtInsiderIsVisible"/>
+                    <include name="clickSeeAllTeamsButtonInTeamsSection"/>
+                    <include name="verifyQualityAssuranceTeamIsVisible"/>
+                    <include name="clickQualityAssuranceTeamIsVisible"/>
+                    <include name="verifyIsInQualityAssurancePage"/>
+                    <include name="clickSeeAllQAJobsButton"/>
+                    <include name="verifyIsInOpenPositionsPage"/>
+                    <include name="verifyQADepartmentIsSelected"/>
+                    <include name="selectIstanbulLocationInFilter"/>
+                    <include name="verifyLocationIstanbulIsSelected"/>
+                    <include name="verifyAllListedJobsDepartmentIsQA"/>
+                    <include name="verifyAllListedJobsLocationIsIstanbul"/>
+                    <include name="clickListedJobViewRoleButton"/>
+                    <include name="verifyIsInLeverApplicationFormPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
