@@ -118,7 +118,7 @@ public class InsiderTest {
         basePage.selectOptionInSelect2(openPositionsPage.filterByLocationSelectBoxBy, "Istanbul, Turkey");
 
         // I'm selecting qa and istanbul filters then checking the result
-        // Scroll to resultCount element in the page because it do not render without scroll
+        // Scroll to resultCount element in the page because it does not render without scroll
         basePage.scrollToElementOfMid(openPositionsPage.resultCountBy);
         // Waiting for first render of total result count
         basePage.isVisible(openPositionsPage.totalResultsCountTextBy);
